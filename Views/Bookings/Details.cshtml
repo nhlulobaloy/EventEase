@@ -1,0 +1,14 @@
+﻿@model EventEase.Models.Booking
+
+<h2>Booking Details</h2>
+
+<div>
+    <p><strong>Event:</strong> @Model.Event?.EventName</p>
+    <p><strong>Venue:</strong> @Model.Venue?.VenueName</p>
+    <p><strong>Booking Date:</strong> @Model.BookingDate.ToShortDateString()</p>
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.BookingId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

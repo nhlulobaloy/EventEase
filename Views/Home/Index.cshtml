@@ -1,0 +1,119 @@
+﻿@model EventEase.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">Welcome to EventEase</h1>
+        <p class="lead">Manage Venues, Events, and Bookings easily.</p>
+    </div>
+
+    <!-- Navigation / Quick Links -->
+    <div class="mb-4 text-center">
+        <a class="btn btn-primary m-1" asp-controller="Venues" asp-action="Index">Venues</a>
+        <a class="btn btn-success m-1" asp-controller="Events" asp-action="Index">Events</a>
+        <a class="btn btn-warning m-1" asp-controller="Bookings" asp-action="Index">Bookings</a>
+    </div>
+
+    <!-- Quick Stats -->
+    <h2>Quick Stats</h2>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card p-3 text-center">
+                <h4>Total Venues</h4>
+                <h2>@Model.TotalVenues</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 text-center">
+                <h4>Total Events</h4>
+                <h2>@Model.TotalEvents</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 text-center">
+                <h4>Total Bookings</h4>
+                <h2>@Model.TotalBookings</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <h2>Quick Actions</h2>
+    <p class="text-center">
+        <a class="btn btn-outline-primary m-1" asp-controller="Venues" asp-action="Create">Create Venue</a>
+        <a class="btn btn-outline-success m-1" asp-controller="Events" asp-action="Create">Create Event</a>
+        <a class="btn btn-outline-warning m-1" asp-controller="Bookings" asp-action="Create">Create Booking</a>
+    </p>
+
+    <!-- Recent Venues -->
+    <h2 class="mt-4">Recent Venues</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Capacity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var v in Model.RecentVenues)
+            {
+                <tr>
+                    <td>@v.VenueName</td>
+                    <td>@v.Location</td>
+                    <td>@v.Capacity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Recent Events -->
+    <h2 class="mt-4">Recent Events</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Venue</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var e in Model.RecentEvents)
+            {
+                <tr>
+                    <td>@e.EventName</td>
+                    <td>@e.EventDate.ToShortDateString()</td>
+                    <td>@e.Venue.VenueName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Recent Bookings -->
+    <h2 class="mt-4">Recent Bookings</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Venue</th>
+                <th>Booking Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in Model.RecentBookings)
+            {
+                <tr>
+                    <td>@b.Event.EventName</td>
+                    <td>@b.Venue.VenueName</td>
+                    <td>@b.BookingDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<EventEase.Models.Venue>
+
+<h2>Venues</h2>
+<p><a asp-action="Create">Create New Venue</a></p>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Capacity</th>
+        <th>Image</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var v in Model)
+    {
+        <tr>
+            <td>@v.VenueName</td>
+            <td>@v.Location</td>
+            <td>@v.Capacity</td>
+            <td><img src="@v.ImageUrl" width="100" /></td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@v.VenueId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@v.VenueId">Details</a> |
+                <form asp-action="Delete" asp-route-id="@v.VenueId" method="post" style="display:inline">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-link">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
